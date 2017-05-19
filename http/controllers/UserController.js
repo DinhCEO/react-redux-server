@@ -1,8 +1,6 @@
-const UserRepository = require('./../../user.manager/users/UserRepository');
-
 module.exports.getAll = function (req, res) {
     const knex         = req.app.get('knex');
-    let userRepository = new UserRepository(knex);
+    let userRepository = req.app.userRepository;
 
     userRepository.getAll()
         .then(data => {
@@ -22,7 +20,7 @@ module.exports.getAll = function (req, res) {
 
 module.exports.getUserById = function (req, res) {
     const knex         = req.app.get('knex');
-    let userRepository = new UserRepository(knex);
+    let userRepository = req.app.userRepository;
     let id             = req.params.id;
     userRepository.getById(id)
         .then(data => {

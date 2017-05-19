@@ -2,12 +2,9 @@ const express = require('express');
 const app     = express();
 const knex    = require('./lib/knex');
 const api     = require('./http/routers/api');
+const boot    = require('./boot');
+boot(app);
 
-
-app.use(function (req, res, next) {
-    req.app.set('knex', knex);
-    next();
-});
 
 app.use('/api', api);
 
