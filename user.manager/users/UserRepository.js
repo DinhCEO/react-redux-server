@@ -22,6 +22,21 @@ class UserRepository {
     getById(id) {
         return this.knex('tbl_users').where('id', id);
     }
+
+    /**
+     * @param email
+     * @param password
+     * @return {boolean}
+     */
+    login(email, password) {
+
+    }
+
+    signUp(credentials) {
+        let user = {
+
+        }
+    }
 }
 
 module.exports = UserRepository;
