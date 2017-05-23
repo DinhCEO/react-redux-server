@@ -10,7 +10,7 @@ module.exports.login = function (req, res, next) {
             if (!credentials[0]) {
                 res.status(400).json({
                     code   : 'E_AUTH',
-                    message: 'Invalid email'
+                    message: 'Incorrect email'
                 });
             }
             return bcryptService.compare(password, credentials[0].password);
@@ -19,7 +19,7 @@ module.exports.login = function (req, res, next) {
             if (!result) {
                 res.status(400).json({
                     code   : 'E_AUTH',
-                    message: 'Invalid password'
+                    message: 'Incorrect password'
                 });
             }
             let payload = {
