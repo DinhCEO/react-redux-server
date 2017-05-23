@@ -11,8 +11,6 @@ module.exports = function (req, res, next) {
     const knex = req.app.get('knex');
     return Promise.all([checkTblUser(knex, req.body.email), checkTblCredentials(knex, req.body.email)])
         .spread((result1, result2) => {
-            console.log(result1);
-            console.log(result2);
             if (!result1[0] && !result2[0]) {
                 return next();
             } else {
