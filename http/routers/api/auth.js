@@ -1,4 +1,4 @@
-const AuthController = require('../../controllers/AuthController');
+const AuthController = require('../../controllers/auth.controller');
 
 const credentials  = require('../middlewares/credentials.middleware');
 const userValidate = require('../middlewares/user-validate.middleware');
