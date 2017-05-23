@@ -6,9 +6,9 @@ exports.seed = function (knex, Promise) {
             return knex('tbl_credentials').insert([
                 {
                     email   : 'pvd02091992@gmail.com',
-                    password: '123456',
+                    password: '$2a$10$tf/OoFvHUldgMgwrOAj7euLRLfyFtf9b6225CPspqRIVxu89WCmOK',
                     avatar  : '/image/avatar.dinhceo.jpg',
-                    role    : 'customer'
+                    role    : 'GUEST'
                 }
             ]);
         });

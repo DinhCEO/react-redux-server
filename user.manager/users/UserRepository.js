@@ -1,6 +1,7 @@
 class UserRepository {
-    constructor(knex) {
+    constructor(knex, role) {
         this.knex = knex;
+        this.role = role;
     }
 
     /**
@@ -32,11 +33,28 @@ class UserRepository {
 
     }
 
-    signUp(credentials) {
-        let user = {
-
-        }
-    }
+    signUp(profile, password) {
+        let self = this;
+        return self.knex.transaction((trx) => {
+            return self.knex('tbl_users')
+                .transacting(trx)
+                .insert(profile)
+                .then(users => {
+                    return self.knex('tbl_credentials').insert({
+                        email     : profile.email,
+                        user_id   : users[0],
+                        password  : password,
+                        created_at: new Date(),
+                        role      : this.role.getRole().guest
+                    })
+                })
+                .then((result) => trx.commit)
+                .catch((err) => {
+                    trx.rollback;
+                    throw Error(err);
+                })
+        });
+    };
 }
 
 module.exports = UserRepository;

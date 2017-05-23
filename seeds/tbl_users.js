@@ -4,9 +4,12 @@ exports.seed = function (knex, Promise) {
         .then(function () {
             // Inserts seed entries
             return knex('tbl_users').insert([
-                {fullname: 'dinhceo1', email: 'pvd02091992@gmail.com', address: 'ha noi'},
-                {fullname: 'dinhceo2', email: 'pvd02091993@gmail.com', address: 'ha noi2'},
-                {fullname: 'dinhceo3', email: 'pvd02091994@gmail.com', address: 'ha noi3'},
+                {
+                    fullname  : 'dinhceo',
+                    email     : 'pvd02091992@gmail.com',
+                    address   : 'ha noi',
+                    created_at: new Date()
+                },
             ]);
         });
 };

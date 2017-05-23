@@ -4,29 +4,17 @@ class BcryptService {
         this.bcrypt = bcrypt;
     }
 
-    hash(resources) {
-        return new Promise((resolve, reject) => {
-            this.bcrypt.hash(resources, this.config.bcrypt.saltRounds)
-                .then((hash) => {
-                    resolve(hash);
-                })
-                .catch((error) => {
-                    reject(error);
-                })
-
-        })
+    setRounds(rounds) {
+        this.rounds = rounds;
+        return this;
     }
 
-    compare(input, resource) {
-        return new Promise((resolve, reject) => {
-            this.bcrypt.compare(input, resource)
-                .then((result) => {
-                    resolve(result);
-                })
-                .catch((error) => {
-                    reject(error);
-                })
-        })
+    hashPassword(source) {
+        return this.bcrypt.hash(source, this.rounds);
+    }
+
+    compare(source, hashed) {
+        return this.bcrypt.compare(source, hashed);
     }
 }
 module.exports = BcryptService;
