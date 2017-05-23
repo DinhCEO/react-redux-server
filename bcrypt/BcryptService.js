@@ -1,6 +1,5 @@
 class BcryptService {
-    constructor(bcrypt, config) {
-        this.config = config;
+    constructor(bcrypt) {
         this.bcrypt = bcrypt;
     }
 
