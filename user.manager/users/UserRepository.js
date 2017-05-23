@@ -29,8 +29,16 @@ class UserRepository {
      * @param password
      * @return {boolean}
      */
-    login(email, password) {
+    login(email) {
+        let self = this;
+        return self.knex('tbl_credentials').where('email', email);
+    }
 
+    saveToken(token, email) {
+        let self = this;
+        return self.knex('tbl_credentials')
+            .where('email', email)
+            .update({token: token});
     }
 
     signUp(profile, password) {
