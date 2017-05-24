@@ -1,14 +1,22 @@
-module.exports.login = function*(req, res, next) {
+module.exports.login = async function (req, res, next) {
     const jwtService     = req.app.get('jwt');
     const bcryptService  = req.app.get('bcrypt');
     const userRepository = req.app.userRepository;
 
-    let email       = req.body.email;
-    let password    = req.body.password;
-    let credentials = yield userRepository.login(email);
+    let email    = req.body.email;
+    let password = req.body.password;
+    //
+    // let credentials = await userRepository.login(email);
+    //
+    // console.log('credentials = ', credentials);
+    // next()
+    let users = await userRepository.login(email);
+
     res.status(200).json({
-        user: credentials[0]
+        data: credentials
     });
+    next();
+
 
     // userRepository.login(email)
     //     .then(credentials => {
