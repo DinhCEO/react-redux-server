@@ -18,5 +18,8 @@
     "jwt-simple": "^0.5.1",
     "knex": "^0.13.0",
     "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "co": "^4.6.0"
   }
 }

@@ -4,13 +4,18 @@ class UserRepository {
         this.role = role;
     }
 
+    getUsers() {
+        console.log('ruuun');
+        return this.knex.select().table('tbl_users');
+    }
+
     /**
      *
      * @returns {Promise}
      */
 
-    getAll() {
-        return this.knex.select().table('tbl_users');
+    *getAll() {
+        return yield this.knex.select().table('tbl_users');
     }
 
 
