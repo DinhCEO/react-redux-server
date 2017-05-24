@@ -1,9 +1,19 @@
 module.exports = {
-    port  : process.env['PORT'] || 8081,
-    auth  : {
+    services: [
+        //service
+        require('./lib/knex.provider'),
+        require('./http/express-server.provider'),
+        require('./user.manager/users/user.repository.provider'),
+        require('./jwt/jwt-service.provider')
+    ],
+    port    : process.env['PORT'] || 8081,
+    auth    : {
         privateKey: process.env['PRIVATE_KEY'] || 'xxx-xxx-xxx'
     },
-    bcrypt: {
+    bcrypt  : {
         saltRounds: 10
+    },
+    cors    : {
+        origin: "*"
     }
 };

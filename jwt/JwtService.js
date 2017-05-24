@@ -1,15 +1,19 @@
 class JwtService {
-    constructor(jwt, config) {
-        this.config = config;
-        this.jwt    = jwt;
+    constructor(jwt) {
+        this.jwt = jwt;
+    }
+
+    setPrivateKey(privateKey) {
+        this.privateKey = privateKey;
+        return this;
     }
 
     encode(payload) {
-        return this.jwt.encode(payload, this.config.auth.privateKey);
+        return this.jwt.encode(payload, this.privateKey);
     }
 
     decode(token) {
-        return this.jwt.decode(token, this.config.auth.privateKey);
+        return this.jwt.decode(token, this.privateKey);
     }
 }
 

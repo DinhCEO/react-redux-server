@@ -13,13 +13,14 @@
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "co": "^4.6.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "jwt-simple": "^0.5.1",
     "knex": "^0.13.0",
-    "mysql": "^2.13.0"
-  },
-  "devDependencies": {
-    "co": "^4.6.0"
+    "lodash": "^4.17.4",
+    "mysql": "^2.13.0",
+    "sphinx-container": "git+https://github.com/sphinx-software/es6-container.git"
   }
 }

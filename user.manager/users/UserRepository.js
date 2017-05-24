@@ -4,7 +4,7 @@ class UserRepository {
         this.role = role;
     }
 
-    getUsers() {
+    *getUsers() {
         console.log('ruuun');
         return this.knex.select().table('tbl_users');
     }
@@ -25,7 +25,7 @@ class UserRepository {
      * @return {Promise}
      */
 
-    getById(id) {
+    *getById(id) {
         return this.knex('tbl_users').where('id', id);
     }
 
@@ -34,19 +34,19 @@ class UserRepository {
      * @param password
      * @return {boolean}
      */
-    login(email) {
+    *login(email) {
         let self = this;
         return self.knex('tbl_credentials').where('email', email);
     }
 
-    saveToken(token, email) {
+    *saveToken(token, email) {
         let self = this;
         return self.knex('tbl_credentials')
             .where('email', email)
             .update({token: token});
     }
 
-    signUp(profile, password) {
+    *signUp(profile, password) {
         let self = this;
         return self.knex.transaction((trx) => {
             return self.knex('tbl_users')

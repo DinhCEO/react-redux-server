@@ -1,8 +1,16 @@
 require('dotenv').config();
+const co   = require('co');
+const boot = require('./boot');
 
-const app    = require('./app');
-const config = require('./config');
+co(function*() {
+    const container = yield boot();
 
-app.listen(config.port, function () {
-    console.log(`server listening port ${config.port}`);
+    const kernel = yield container.make('http.kernel');
+    const config = yield container.make('config');
+
+    kernel.listen(config.port, function () {
+        console.log(`server listening port ${config.port}`);
+    });
+}).catch(error => {
+    console.error(error);
 });
