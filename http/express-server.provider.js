@@ -6,6 +6,7 @@ const cors       = require('cors');
 module.exports = function (container) {
     container.singleton('http.kernel', function *() {
         const config = yield container.make('config');
+        const router = yield container.make('http.router');
 
         app.use(bodyParser.json());
         app.use(cors(config.cors.origin));
@@ -13,6 +14,8 @@ module.exports = function (container) {
             req.container = container;
             next();
         });
+
+        app.use('/api/', router);
 
         return app;
     })
