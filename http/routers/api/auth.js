@@ -1,11 +1,12 @@
-const AuthController    = require('../../controllers/auth.controller');
+const authController = require('../../controllers/auth.controller');
 
-const credentials  = require('../middlewares/credentials.middleware');
-const userValidate = require('../middlewares/user-validate.middleware');
-const emailExisted = require('../middlewares/email.unique.middleware');
+const credentialsValidator = require('../middlewares/credentials-validator.middleware');
+const userValidator        = require('../middlewares/user-validate.middleware');
+const emailExisted         = require('../middlewares/email.existed.middleware');
+const w                    = require('co-express');
 
 module.exports = function (router) {
     router
-        .post('/login', credentials, AuthController.login)
-        .post('/signUp', userValidate, emailExisted, AuthController.signUp);
+        .post('/login', credentialsValidator, w(authController.login))
+        .post('/signUp', userValidator, emailExisted, w(authController.signUp));
 };

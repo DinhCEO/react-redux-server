@@ -39,10 +39,10 @@ class UserRepository {
         return self.knex('tbl_credentials').where('email', email);
     }
 
-    *saveToken(token, email) {
+    *saveToken(token, credentialsId) {
         let self = this;
         return self.knex('tbl_credentials')
-            .where('email', email)
+            .where('id', credentialsId)
             .update({token: token});
     }
 

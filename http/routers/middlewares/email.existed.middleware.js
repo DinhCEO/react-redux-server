@@ -8,8 +8,10 @@ let checkTblCredentials = (knex, email) => {
 };
 
 module.exports = function (req, res, next) {
-    const knex = req.app.get('knex');
-    return Promise.all([checkTblUser(knex, req.body.email), checkTblCredentials(knex, req.body.email)])
+    const knex   = req.app.get('knex');
+    let email    = req.body.email;
+    let password = req.body.password;
+    return Promise.all([checkTblUser(knex, email), checkTblCredentials(knex, password)])
         .spread((result1, result2) => {
             if (!result1[0] && !result2[0]) {
                 return next();

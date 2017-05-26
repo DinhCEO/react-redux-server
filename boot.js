@@ -1,6 +1,4 @@
-const config = require('./config');
-// const lodash                 = require('lodash');
-
+const config    = require('./config');
 const Container = require('sphinx-container');
 let container   = new Container();
 
@@ -9,8 +7,8 @@ module.exports = function*() {
         return config;
     });
 
-    for (let index = 0; config.services.length; index++) {
-        yield config.services[index](container);
+    for (let i = 0; i < config.services.length; i++) {
+        config.services[i](container);
     }
 
     return container;
