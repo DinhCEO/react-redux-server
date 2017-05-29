@@ -30,19 +30,19 @@ module.exports.login = function*(req, res, next) {
         };
         let token       = jwtService.encode(payload);
         yield userRepository.saveToken(token, credentials[0].id);
-        res.status(200).json({
+        return res.status(200).json({
             token  : token,
             profile: payload
         });
 
     } catch (ex) {
         if (ex instanceof AuthenticateError) {
-            res.status(400).json({
+            return res.status(404).json({
                 code   : 'E_AUTH',
                 message: ex.message
             });
         }
-        res.status(500).json({
+        return res.status(500).json({
             message: 'SERVER ERROR'
         });
     }
@@ -63,7 +63,7 @@ module.exports.signUp = function *(req, res, next) {
             phone     : req.body.phone
         };
         yield userRepository.signUp(profile, hashPassword);
-        res.status(200).json({
+        return res.status(200).json({
             message: 'SignUp success'
         });
     } catch (error) {

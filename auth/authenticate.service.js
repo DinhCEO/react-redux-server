@@ -7,15 +7,15 @@ class AuthenticateService {
     }
 
     *login(email, password) {
-        let credentials = yield this.knex()
+        let credentials = yield this.knex
             .select()
             .from('tbl_credentials')
             .where('email', email);
         if (!credentials.length) {
-            throw new AuthenticateService('User not existed');
+            throw new AuthenticateError('User not exist');
         }
         if (!this.bcryptHasher.compare(password, credentials.password)) {
-            throw new AuthenticateService('Incorrect password');
+            throw new AuthenticateError('Incorrect password');
         }
         return credentials;
     }
