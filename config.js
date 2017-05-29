@@ -6,7 +6,8 @@ module.exports = {
         require('./http/routers/routers.provider'),
         require('./user.manager/users/user.repository.provider'),
         require('./jwt/jwt-service.provider'),
-        require('./hasher/bcrypt.provider')
+        require('./hasher/bcrypt.provider'),
+        require('./auth/auth.provider')
     ],
     port    : process.env['PORT'] || 8081,
     auth    : {

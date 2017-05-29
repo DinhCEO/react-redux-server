@@ -12,7 +12,7 @@ module.exports = function (container) {
         app.use(bodyParser.json());
         app.use(cors(config.cors.origin));
         app.use(function (req, res, next) {
-            console.log('gim container');
+            // console.log('gim container');
             req.container = container;
             next();
         });

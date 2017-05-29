@@ -8,5 +8,5 @@ const w                    = require('co-express');
 module.exports = function (router) {
     router
         .post('/login', credentialsValidator, w(authController.login))
-        .post('/signUp', userValidator, emailExisted, w(authController.signUp));
+        .post('/signUp', userValidator, w(emailExisted), w(authController.signUp));
 };

@@ -26,7 +26,7 @@ class UserRepository {
      */
 
     *getById(id) {
-        return this.knex('tbl_users').where('id', id);
+        return yield this.knex('tbl_users').where('id', id);
     }
 
     /**
@@ -36,19 +36,19 @@ class UserRepository {
      */
     *login(email) {
         let self = this;
-        return self.knex('tbl_credentials').where('email', email);
+        return yield self.knex('tbl_credentials').where('email', email);
     }
 
     *saveToken(token, credentialsId) {
         let self = this;
-        return self.knex('tbl_credentials')
-            .where('id', credentialsId)
+        return yield self.knex('tbl_credentials')
+            .where('user_id', credentialsId)
             .update({token: token});
     }
 
     *signUp(profile, password) {
         let self = this;
-        return self.knex.transaction((trx) => {
+        return yield self.knex.transaction((trx) => {
             return self.knex('tbl_users')
                 .transacting(trx)
                 .insert(profile)
@@ -64,7 +64,7 @@ class UserRepository {
                 .then((result) => trx.commit)
                 .catch((err) => {
                     trx.rollback;
-                    throw Error(err);
+                    throw new Error(err);
                 })
         });
     };
