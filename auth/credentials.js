@@ -3,7 +3,7 @@ class Credentials {
         this.props = props;
     }
 
-    static toJson() {
+    static toPayload() {
         return {
 
         }

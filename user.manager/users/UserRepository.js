@@ -36,12 +36,13 @@ class UserRepository {
      */
     *login(email) {
         let self = this;
-        return yield self.knex('tbl_credentials').where('email', email);
+        return yield self.knex.from('tbl_credentials').where('email', email);
     }
 
     *saveToken(token, credentialsId) {
         let self = this;
-        return yield self.knex('tbl_credentials')
+        return yield self.knex
+            .from('tbl_credentials')
             .where('user_id', credentialsId)
             .update({token: token});
     }

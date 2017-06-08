@@ -1,4 +1,4 @@
-const AuthenticateError = require('./error/authenticate-error');
+const AuthenticationError = require('../message/auth-error');
 
 class AuthenticateService {
     constructor(knex, bcryptHasher) {
@@ -12,10 +12,10 @@ class AuthenticateService {
             .from('tbl_credentials')
             .where('email', email);
         if (!credentials.length) {
-            throw new AuthenticateError('User not exist');
+            throw new AuthenticationError('User not exist');
         }
         if (!this.bcryptHasher.compare(password, credentials.password)) {
-            throw new AuthenticateError('Incorrect password');
+            throw new AuthenticationError('Incorrect password');
         }
         return credentials;
     }

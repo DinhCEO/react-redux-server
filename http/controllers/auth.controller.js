@@ -1,14 +1,5 @@
-/**
- * dang lam login(ret => credentials)
- * check password(ret => true/false)
- * encode(ret => token)
- * save token to database
- * success (ret => {profile:token,code:'SUCCESS',uuid:'....'})
- * @param req
- * @param res
- * @param next
- */
-const AuthenticateError = require('./../../auth/error/authenticate-error');
+const DinhceoMessage                      = require('./../../message/dinhceo-message');
+const {SUCCESS, SERVER_ERROR} = require('../../message/message-code');
 
 module.exports.login = function*(req, res, next) {
     console.log('inside login');
@@ -25,25 +16,23 @@ module.exports.login = function*(req, res, next) {
         let credentials = yield authenticateService.login(email, password);
         let payload     = {
             email: email,
-            role : 'customer',
+            role : credentials[0].role,
             time : new Date()
         };
         let token       = jwtService.encode(payload);
         yield userRepository.saveToken(token, credentials[0].id);
         return res.status(200).json({
+            code   : SUCCESS,
             token  : token,
             profile: payload
         });
 
     } catch (ex) {
-        if (ex instanceof AuthenticateError) {
-            return res.status(404).json({
-                code   : 'E_AUTH',
-                message: ex.message
-            });
+        if (ex instanceof DinhceoMessage) {
+            return res.status(404).json(ex.toJson());
         }
         return res.status(500).json({
-            message: 'SERVER ERROR'
+            message: SERVER_ERROR
         });
     }
 };
@@ -62,10 +51,12 @@ module.exports.signUp = function *(req, res, next) {
             address   : req.body.address,
             phone     : req.body.phone
         };
+
         yield userRepository.signUp(profile, hashPassword);
         return res.status(200).json({
-            message: 'SignUp success'
+            message: SUCCESS
         });
+
     } catch (error) {
         next(error);
     }
