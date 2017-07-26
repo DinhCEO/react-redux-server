@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
     "mysql": "^2.13.0",
+    "pg": "^7.0.2",
     "sphinx-container": "git+https://github.com/sphinx-software/es6-container.git"
   }
 }

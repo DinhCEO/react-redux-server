@@ -1,10 +1,12 @@
 module.exports = {
-    client    : 'mysql',
+    client    : 'pg',
     connection: {
-        host    : process.env['DB_HOST'] || '127.0.0.1',
-        user    : process.env['DB_USERNAME'] || 'root',
-        password: process.env['DB_PASSWORD'] || '11026789',
-        database: process.env['DB_DATABASE_NAME'] || 'project_react'
+        host    : 'ec2-107-21-113-16.compute-1.amazonaws.com',
+        user    : 'flwmfwghisvryk',
+        password: 'a9cb9a4075cbbdecaf7975e6ae1ba9705b6e3b8dc194f437730ef3f5ae7302d8',
+        database: 'd1k0ave8lgra3h',
+        port    : '5432',
+        ssl     : true
     },
     pool      : {min: 0, max: 7}
 };
